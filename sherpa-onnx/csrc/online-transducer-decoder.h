@@ -20,12 +20,23 @@ struct OnlineTransducerDecoderResult {
   /// The decoded token IDs so far
   std::vector<int64_t> tokens;
 
+  /// Begin JRN
+  /// record ongoing processed frames
+  int32_t num_processed_frames = 0;
+  /// number of blank frames processed so far
+  int32_t num_blank_frames = 0;
+  /// silences[i] contains the total count of identified silence frames
+  std::vector<int32_t> silences;
+  /// timestamp_frames[i] indices of identified words
+  std::vector<int32_t> timestamp_frames;
+  /// End JRN
+  
   /// number of trailing blank frames decoded so far
   int32_t num_trailing_blanks = 0;
 
   /// timestamps[i] contains the output frame index where tokens[i] is decoded.
   std::vector<int32_t> timestamps;
-
+  
   // Cache decoder_out for endpointing
   Ort::Value decoder_out;
 
@@ -33,7 +44,8 @@ struct OnlineTransducerDecoderResult {
   Hypotheses hyps;
 
   OnlineTransducerDecoderResult()
-      : tokens{}, num_trailing_blanks(0), decoder_out{nullptr}, hyps{} {}
+    : tokens{}, timestamp_frames{}, silences{}, num_trailing_blanks(0),
+      num_processed_frames(0), num_blank_frames(0), decoder_out{nullptr}, hyps{} {}
 
   OnlineTransducerDecoderResult(const OnlineTransducerDecoderResult &other);
 

@@ -39,6 +39,11 @@ struct OnlineRecognizerResult {
   /// timestamps[i] records the time in seconds when tokens[i] is decoded.
   std::vector<float> timestamps;
 
+  /// silences
+  std::vector<int32_t> silences;
+  /// timestamp frames indices
+  std::vector<int32_t> timestamp_frames;
+  
   /// ID of this segment
   /// When an endpoint is detected, it is incremented
   int32_t segment = 0;
@@ -50,6 +55,9 @@ struct OnlineRecognizerResult {
   /// True if this is the last segment.
   bool is_final = false;
 
+  int32_t num_processed_frames;
+  int32_t num_blank_frames;
+  
   /** Return a json string.
    *
    * The returned string contains:

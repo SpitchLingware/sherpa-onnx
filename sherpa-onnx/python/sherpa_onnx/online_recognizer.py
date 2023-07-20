@@ -1,6 +1,6 @@
 # Copyright (c)  2023  Xiaomi Corporation
 from pathlib import Path
-from typing import List, Optional
+from typing import List, Optional, Any
 
 from _sherpa_onnx import (
     EndpointConfig,
@@ -154,6 +154,9 @@ class OnlineRecognizer(object):
     def get_result(self, s: OnlineStream) -> str:
         return self.recognizer.get_result(s).text.strip()
 
+    def get_result_obj(self, s: OnlineStream) -> Any:
+        return self.recognizer.get_result(s)
+    
     def tokens(self, s: OnlineStream) -> List[str]:
         return self.recognizer.get_result(s).tokens
 
