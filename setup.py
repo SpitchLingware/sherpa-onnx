@@ -47,13 +47,14 @@ def get_binaries_to_install():
     suffix = ".exe" if is_windows() else ""
 
     # Remember to also change cmake/cmake_extension.py
-    binaries = ["sherpa-onnx"]
-    binaries += ["sherpa-onnx-offline"]
-    binaries += ["sherpa-onnx-microphone"]
-    binaries += ["sherpa-onnx-microphone-offline"]
-    binaries += ["sherpa-onnx-online-websocket-server"]
-    binaries += ["sherpa-onnx-offline-websocket-server"]
-    binaries += ["sherpa-onnx-online-websocket-client"]
+    binaries = []
+    #binaries = ["sherpa-onnx"]
+    #binaries += ["sherpa-onnx-offline"]
+    #binaries += ["sherpa-onnx-microphone"]
+    #binaries += ["sherpa-onnx-microphone-offline"]
+    #binaries += ["sherpa-onnx-online-websocket-server"]
+    #binaries += ["sherpa-onnx-offline-websocket-server"]
+    #binaries += ["sherpa-onnx-online-websocket-client"]
 
     exe = []
     for f in binaries:
@@ -66,7 +67,7 @@ setuptools.setup(
     name=package_name,
     python_requires=">=3.6",
     install_requires=install_requires,
-    version=get_package_version(),
+    version=f"{get_package_version()}",
     author="The sherpa-onnx development team",
     author_email="dpovey@gmail.com",
     package_dir={

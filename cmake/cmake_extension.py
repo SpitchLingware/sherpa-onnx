@@ -71,13 +71,14 @@ class BuildExtension(build_ext):
         if cmake_args == "":
             cmake_args = "-DCMAKE_BUILD_TYPE=Release"
 
+        # Modified for minimal python support
         extra_cmake_args = f" -DCMAKE_INSTALL_PREFIX={install_dir} "
-        extra_cmake_args += " -DBUILD_SHARED_LIBS=ON "
+        extra_cmake_args += " -DBUILD_SHARED_LIBS=OFF "
 
         extra_cmake_args += " -DSHERPA_ONNX_ENABLE_CHECK=OFF "
         extra_cmake_args += " -DSHERPA_ONNX_ENABLE_PYTHON=ON "
-        extra_cmake_args += " -DSHERPA_ONNX_ENABLE_PORTAUDIO=ON "
-        extra_cmake_args += " -DSHERPA_ONNX_ENABLE_WEBSOCKET=ON "
+        extra_cmake_args += " -DSHERPA_ONNX_ENABLE_PORTAUDIO=OFF "
+        extra_cmake_args += " -DSHERPA_ONNX_ENABLE_WEBSOCKET=OFF "
 
         if "PYTHON_EXECUTABLE" not in cmake_args:
             print(f"Setting PYTHON_EXECUTABLE to {sys.executable}")
@@ -128,14 +129,15 @@ class BuildExtension(build_ext):
 
         suffix = ".exe" if is_windows() else ""
         # Remember to also change setup.py
-
-        binaries = ["sherpa-onnx"]
-        binaries += ["sherpa-onnx-offline"]
-        binaries += ["sherpa-onnx-microphone"]
-        binaries += ["sherpa-onnx-microphone-offline"]
-        binaries += ["sherpa-onnx-online-websocket-server"]
-        binaries += ["sherpa-onnx-offline-websocket-server"]
-        binaries += ["sherpa-onnx-online-websocket-client"]
+        # Modified for minimal python support
+        binaries = []
+        #binaries = ["sherpa-onnx"]
+        #binaries += ["sherpa-onnx-offline"]
+        #binaries += ["sherpa-onnx-microphone"]
+        #binaries += ["sherpa-onnx-microphone-offline"]
+        #binaries += ["sherpa-onnx-online-websocket-server"]
+        #binaries += ["sherpa-onnx-offline-websocket-server"]
+        #binaries += ["sherpa-onnx-online-websocket-client"]
 
         for f in binaries:
             src_file = install_dir / "bin" / (f + suffix)
